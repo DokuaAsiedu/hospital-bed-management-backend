@@ -1,17 +1,17 @@
 import { MongoClient } from "mongodb";
 import { URI, DB_NAME } from "./config/config.js";
 
-const client = new MongoClient(URI)
+export class Connection {
+  static client = new MongoClient(URI)
 
-const connectToDatabase = async () => {
-  try {
-    const connection = await client.connect()
-    console.log(`Successfully connected`)
-    return connection.db(DB_NAME)
-  } catch(err) {
-    console.log(`Error connecting: ${err}`)
+  static async connectToDb() {
+    try {
+      const connection = await this.client.connect()
+      console.log("Successfully connected to cluster")
+      console.log(`Successfully connected to db: ${DB_NAME}`)
+      return connection.db(DB_NAME)
+    } catch (err) {
+      console.log(`Error connecting to cluster: ${err}`)
+    }
   }
 }
-
-// exports
-export {client, connectToDatabase}
