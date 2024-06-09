@@ -1,10 +1,9 @@
 import { Router } from "express"
+import { getPatients } from "../controllers/index.js"
 
 const patientsRouter = Router()
 
-patientsRouter.get("/", (req, res) => {
-  res.send("Hello Patients!")
-})
+patientsRouter.get("/", getPatients)
 
 // exports
 export {patientsRouter}
