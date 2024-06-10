@@ -1,0 +1,5 @@
+export * from "./base.service.js"
+export * from "./beds.service.js"
+export * from "./hospitals.service.js"
+export * from "./patients.service.js"
+export * from "./users.service.js"
