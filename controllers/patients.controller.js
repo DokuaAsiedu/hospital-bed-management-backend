@@ -17,5 +17,20 @@ async function getPatients(req, res) {
   }
 }
 
+async function addPatients(req, res) {
+  try {
+    const result = await patientsInstance.insertDocs(req.body)
 
-export {getPatients}
+    res.json({
+      text: "Add Patients!",
+      data: result
+    })
+
+    console.log("Successfully inserted data into patients collection")
+  } catch(err) {
+    console.log("Error inserting data into patients collection", err)
+  }
+}
+
+
+export {getPatients, addPatients}

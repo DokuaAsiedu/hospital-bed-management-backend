@@ -1,10 +1,10 @@
 import { Hospital } from "../models/hospitals.model.js"
 
-const hospitalInstance = new Hospital()
+const hospitalsInstance = new Hospital()
 
 async function getHospitals(req, res) {
   try {
-    const docs = await hospitalInstance.getDocuments()
+    const docs = await hospitalsInstance.getDocuments()
 
     res.json({
       text: "Hello Hospitals!",
@@ -17,4 +17,19 @@ async function getHospitals(req, res) {
   }
 }
 
-export {getHospitals}
+async function addHospitals(req, res) {
+  try {
+    const result = await hospitalsInstance.insertDocs(req.body)
+
+    res.json({
+      text: "Add Hospitals!",
+      data: result
+    })
+
+    console.log("Successfully inserted data in tp hospitals collection")
+  } catch(err) {
+    console.log("Error inserting data into hospitals collection", err)
+  }
+}
+
+export {getHospitals, addHospitals}

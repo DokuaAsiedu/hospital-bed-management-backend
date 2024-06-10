@@ -18,4 +18,15 @@ export class Base {
       console.log(`Error fetching documents from ${this.collectionName} collection:`, err)
     }
   }
+
+  async insertDocs(docs) {
+    try {
+      const collection = await this.connnectToCollection()
+      const result = await collection.insertMany(docs)
+      console.log(result)
+      return result
+    } catch(err) {
+      console.log(`Error inserting documents in ${this.collectionName} collection:`, err)
+    }
+  }
 }

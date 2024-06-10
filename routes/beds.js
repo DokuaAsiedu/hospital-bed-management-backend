@@ -1,9 +1,10 @@
 import { Router } from "express"
-import { getBeds } from "../controllers/index.js"
+import { getBeds, addBeds } from "../controllers/index.js"
 
 const bedsRouter = Router()
 
 bedsRouter.get("/", getBeds)
+bedsRouter.post("/add", addBeds)
 
 // exports
 export {bedsRouter}

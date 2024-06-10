@@ -17,4 +17,19 @@ async function getBeds(req, res) {
   }
 }
 
-export {getBeds}
+async function addBeds(req, res) {
+  try {
+    const result = await bedsInstance.insertDocs(req.body)
+
+    res.json({
+      text: "Add Beds!",
+      data: result
+    })
+
+    console.log("Successfully inserted data into beds collection")
+  } catch(err) {
+    console.log("Error inserting data into beds collection", err)
+  }
+}
+
+export {getBeds, addBeds}
