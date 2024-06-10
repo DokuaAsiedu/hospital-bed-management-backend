@@ -38,5 +38,10 @@ async function deletePatientsService(reqBody) {
   return result
 }
 
+async function changePatientNameService(reqBody) {
+  const result = await patientsInstance.changePatientName(reqBody)
+  return result
+}
 
-export { getPatientsService, addPatientsService, deletePatientsService}
+
+export { getPatientsService, addPatientsService, deletePatientsService, changePatientNameService}
