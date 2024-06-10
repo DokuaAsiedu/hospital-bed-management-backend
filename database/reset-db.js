@@ -1,29 +1,26 @@
-// import { ObjectId } from "mongodb"
-import { Base, Bed, Hospital, Patient, User } from "../models/index.js"
-import { collection_names } from "../constants/collection-names.js"
+import { Base } from "../models/index.js"
+import { COLLECTION_NAMES } from "../constants/collection-names.js"
 import { BEDS_DATA, USERS_DATA, PATIENTS_DATA, HOSPITALS_DATA } from "../data/collections-data.js"
 
 export const DEFAULT_COLLECTIONS = [
   {
-    name: collection_names.BEDS,
-    data: BEDS_DATA,
-    class_identifier: Bed
+    name: COLLECTION_NAMES.BEDS,
+    data: BEDS_DATA
   },
   {
-    name: collection_names.USERS,
-    data: USERS_DATA,
-    class_identifier: User
+    name: COLLECTION_NAMES.USERS,
+    data: USERS_DATA
   },
   {
-    name: collection_names.PATIENTS,
-    data: PATIENTS_DATA,
-    class_identifier: Patient
+    name: COLLECTION_NAMES.PATIENTS,
+    data: PATIENTS_DATA
   },
   {
-    name: collection_names.HOSPITALS,
-    data: HOSPITALS_DATA,
-    class_identifier: Hospital
+    name: COLLECTION_NAMES.HOSPITALS,
+    data: HOSPITALS_DATA
   },
 ]
 
-Base.resetDb()
+export function resetDb() {
+  Base.resetDb()
+}
