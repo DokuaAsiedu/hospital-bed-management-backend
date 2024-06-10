@@ -1,16 +1,14 @@
-import { COLLECTION_NAMES } from "../constants/collection-names.js"
-import { addPatientsService, getPatientsService, deletePatientsService, changePatientNameService } from "../services/index.js"
+import { addPatientsService, getPatientsService, deletePatientsService, changePatientNameService, checkInPatientService } from "../services/index.js"
 import { getController, addController, deleteController } from "./index.js"
-const collectionName = COLLECTION_NAMES.PATIENTS
 
 async function getPatientsController(req, res) {
-  const docs = await getController({collectionName, service: getPatientsService})
+  const docs = await getController({service: getPatientsService})
 
   res.json(docs)
 }
 
 async function addPatientsController(req, res) {
-  const result = await addController({reqbody: req.body, collectionName, service: addPatientsService})
+  const result = await addController({reqbody: req.body, service: addPatientsService})
 
   res.json(result)
 }
@@ -28,4 +26,10 @@ async function changePatientNameController(req, res) {
   res.json(result)
 }
 
-export {getPatientsController, addPatientsController, deletePatientsController, changePatientNameController}
+async function checkInPatientController(req, res) {
+  const result = await checkInPatientService(req.body)
+  
+  res.json(result)
+}
+
+export {getPatientsController, addPatientsController, deletePatientsController, changePatientNameController, checkInPatientController}

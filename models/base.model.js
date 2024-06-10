@@ -28,10 +28,10 @@ export class Base {
     return db.collection(this.collectionName)
   }
 
-  async getDocuments() {
+  async getDocuments(filter) {
     try {
       const collection = await this.connnectToCollection()
-      const docs = await collection.find({}).toArray()
+      const docs = await collection.find(filter).toArray()
       console.log(docs)
       return docs
     } catch(err) {

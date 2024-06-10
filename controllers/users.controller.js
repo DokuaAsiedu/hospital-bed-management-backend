@@ -1,16 +1,14 @@
-import { COLLECTION_NAMES } from "../constants/collection-names.js"
 import { addUsersService, getUsersService, deleteUsersService } from "../services/index.js"
 import { getController, addController, deleteController } from "./index.js"
-const collectionName = COLLECTION_NAMES.USERS
 
 async function getUsersController(req, res) {
-  const docs = await getController({collectionName, service: getUsersService})
+  const docs = await getController({service: getUsersService})
 
   res.json(docs)
 }
 
 async function addUsersController(req, res) {
-  const result = await addController({reqbody: req.body, collectionName, service: addUsersService})
+  const result = await addController({reqbody: req.body, service: addUsersService})
 
   res.json(result)
 }

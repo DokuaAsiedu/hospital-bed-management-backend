@@ -7,27 +7,15 @@ const idPrefix = COLLECTION_IDS_PREFIX.HOSPITALS
 const collectionName = COLLECTION_NAMES.HOSPITALS
 
 async function getHospitalsService() {
-  try {
-    const args = {instance: hospitalsInstance, collectionName}
-    const docs = await getService(args)
-
-    console.log(`Successfully fetched data from ${collectionName} collection`)
-    return docs
-  } catch(err) {
-    console.log(`Error fetching from ${collectionName} collection`, err)
-  }
+  const args = {instance: hospitalsInstance, collectionName}
+  const docs = await getService(args)
+  return docs
 }
 
 async function addHospitalsService(reqBody) {
-  try {
-    const args = {instance: hospitalsInstance, collectionName, reqBody, idPrefix}
-    const result = await addService(args)
-
-    console.log(`Successfully inserted data into ${collectionName} collection`)
-    return result
-  } catch(err) {
-    console.log(`Error inserting data into ${collectionName} collection`, err)
-  }
+  const args = {instance: hospitalsInstance, collectionName, reqBody, idPrefix}
+  const result = await addService(args)
+  return result
 }
 
 async function deleteHospitalsService(reqBody) {

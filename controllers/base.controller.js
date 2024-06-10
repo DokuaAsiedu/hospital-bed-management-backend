@@ -1,30 +1,18 @@
-async function getController({collectionName, service}) {
-  try {
-    const docs = await service()
-    
-    console.log(`Successfully fetched data from ${collectionName} collection`)
+async function getController({service, query={}}) {
+  const docs = await service({query})
 
-    return {
-      "text": "getting",
-      data: docs
-    }
-  } catch(err) {
-    console.log(`Error fetching from ${collectionName} collection`, err)
+  return {
+    "text": "getting",
+    data: docs
   }
 }
 
-async function addController({reqbody, collectionName, service}) {
-  try {
-    const result = await service(reqbody)
+async function addController({reqbody, service}) {
+  const result = await service(reqbody)
 
-    console.log(`Successfully inserted data into ${collectionName} collection`)
-
-    return {
-      text: "adding",
-      data: result
-    }
-  } catch(err) {
-    console.log(`Error inserting data into ${collectionName} collection`, err)
+  return {
+    text: "adding",
+    data: result
   }
 }
 
