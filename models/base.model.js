@@ -2,6 +2,7 @@ import { DB_NAME } from "../config/config.js";
 import { Connection } from "../connection.js"
 import { Db } from "mongodb";
 import { DEFAULT_COLLECTIONS } from "../database/reset-db.js";
+import { CollectionFactory } from "../factory/collection.factory.js";
 
 export class Base {
   collectionName;
@@ -14,7 +15,7 @@ export class Base {
 
       DEFAULT_COLLECTIONS.forEach(async (item) => {
        await db.createCollection(item.name)
-       const instance = new item.class_identifier()
+       const instance = new CollectionFactory(item.name)
        await instance.insertDocs(item.data)
       });
     } catch (err) {

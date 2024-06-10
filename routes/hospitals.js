@@ -1,10 +1,10 @@
 import { Router } from "express"
-import { getHospitals, addHospitals } from "../controllers/index.js"
+import { getHospitalsController, addHospitalsController } from "../controllers/index.js"
 
 const hospitalsRouter = Router()
 
-hospitalsRouter.get("/", getHospitals)
-hospitalsRouter.post("/add", addHospitals)
+hospitalsRouter.get("/", getHospitalsController)
+hospitalsRouter.post("/add", addHospitalsController)
 
 // exports
 export {hospitalsRouter}
