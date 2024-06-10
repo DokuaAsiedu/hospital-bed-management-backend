@@ -31,7 +31,11 @@ async function changePatientNameService(reqBody) {
 }
 
 async function checkInPatientService(reqBody) {
-
+  if (!reqBody._id) {
+    return {message: "No patient id added"}
+  }
+  const result = await patientsInstance.checkInPatient(reqBody)
+  return result
 }
 
 

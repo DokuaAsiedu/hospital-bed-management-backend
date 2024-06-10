@@ -7,7 +7,7 @@ patientsRouter.get("/", getPatientsController)
 patientsRouter.post("/add", addPatientsController)
 patientsRouter.delete("/delete", deletePatientsController)
 patientsRouter.patch("/change-name", changePatientNameController)
-patientsRouter.patch("/check-in", checkInPatientController)
+patientsRouter.post("/check-in", checkInPatientController)
 
 // exports
 export {patientsRouter}

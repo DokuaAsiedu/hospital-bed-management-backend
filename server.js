@@ -13,7 +13,7 @@ app.listen(PORT || 8080, () => {
 })
 
 app.get("/", (req, res) => {
-  res.status(200).send("Hello System!")
+  res.send("Hello System!")
 })
 
 app.use("/hospitals", hospitalsRouter)

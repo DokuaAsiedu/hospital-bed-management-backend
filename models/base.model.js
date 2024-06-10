@@ -68,8 +68,7 @@ export class Base {
       })
 
       const result = {
-        message: `Successfully deleted data from ${this.collectionName} collection`,
-        status_code: 200
+        message: `Successfully deleted data from ${this.collectionName} collection`
       }
 
       console.log(`Successfully deleted data from ${this.collectionName} collection`)
