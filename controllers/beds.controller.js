@@ -1,33 +1,26 @@
-import { addBedsService, getBedsService } from "../services/index.js"
+import { COLLECTION_NAMES } from "../constants/collection-names.js"
+import { addBedsService, getBedsService, deleteBedsService } from "../services/index.js"
+import { getController, addController, deleteController } from "./index.js"
+
+const collectionName = COLLECTION_NAMES.BEDS
 
 async function getBedsController(req, res) {
-  try {
-    const docs = await getBedsService()
-
-    res.json({
-      text: "Hello Beds!",
-      data: docs
-    })
-
-    console.log("Successfully fetched data from beds collection")
-  } catch(err) {
-    console.log("Error fetching from beds collection", err)
-  }
+  const docs = await getController({collectionName, service: getBedsService})
+  
+  res.json(docs)
 }
 
 async function addBedsController(req, res) {
-  try {
-    const result = await addBedsService(req.body)
+  const result = await addController({reqbody: req.body, collectionName, service: addBedsService})
 
-    res.json({
-      text: "Add Beds!",
-      data: result
-    })
-
-    console.log("Successfully inserted data into beds collection")
-  } catch(err) {
-    console.log("Error inserting data into beds collection", err)
-  }
+  res.json(result)
 }
 
-export {getBedsController, addBedsController}
+async function deleteBedsController(req, res) {
+  const args = {reqBody: req.body, service: deleteBedsService}
+  const result = await deleteController(args)
+
+  res.json(result)
+}
+
+export {getBedsController, addBedsController, deleteBedsController}

@@ -1,6 +1,6 @@
 import { Bed } from "../models/index.js"
 import { COLLECTION_IDS_PREFIX, COLLECTION_NAMES } from "../constants/index.js"
-import { getService, addService } from "./index.js"
+import { getService, addService, deleteService } from "./index.js"
 
 const bedsInstance = new Bed()
 const idPrefix = COLLECTION_IDS_PREFIX.BEDS
@@ -30,5 +30,13 @@ async function addBedsService(reqBody) {
   }
 }
 
+async function deleteBedsService(reqBody) {
+  const args = {instance: bedsInstance, reqBody}
 
-export { getBedsService, addBedsService}
+  const result = await deleteService(args)
+
+  return result
+}
+
+
+export { getBedsService, addBedsService, deleteBedsService}

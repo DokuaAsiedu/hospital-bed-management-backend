@@ -28,5 +28,10 @@ async function addService({instance, collectionName, reqBody, idPrefix}) {
   }
 }
 
+async function deleteService({instance, reqBody}) {
+  const result = await instance.deleteDocs(reqBody)
+  return result
+}
 
-export { getService, addService}
+
+export { getService, addService, deleteService }

@@ -1,33 +1,25 @@
-import { addHospitalsService, getHospitalsService } from "../services/index.js"
+import { COLLECTION_NAMES } from "../constants/collection-names.js"
+import { addHospitalsService, getHospitalsService, deleteHospitalsService } from "../services/index.js"
+import { getController, addController, deleteController } from "./index.js"
+const collectionName = COLLECTION_NAMES.HOSPITALS
 
 async function getHospitalsController(req, res) {
-  try {
-    const docs = await getHospitalsService()
+  const docs = await getController({collectionName, service: getHospitalsService})
 
-    res.json({
-      text: "Hello Hospitals!",
-      data: docs
-    })
-
-    console.log("Successfully fetched data from hospitals collection")
-  } catch(err) {
-    console.log("Error fetching from hospitals collection", err)
-  }
+  res.json(docs)
 }
 
 async function addHospitalsController(req, res) {
-  try {
-    const result = await addHospitalsService(req.body)
+  const result = await addController({reqbody: req.body, collectionName, service: addHospitalsService})
 
-    res.json({
-      text: "Add Hospitals!",
-      data: result
-    })
-
-    console.log("Successfully inserted data in tp hospitals collection")
-  } catch(err) {
-    console.log("Error inserting data into hospitals collection", err)
-  }
+  res.json(result)
 }
 
-export {getHospitalsController, addHospitalsController}
+async function deleteHospitalsController(req, res) {
+  const args = {reqBody: req.body, service: deleteHospitalsService}
+  const result = await deleteController(args)
+
+  res.json(result)
+}
+
+export {getHospitalsController, addHospitalsController, deleteHospitalsController}

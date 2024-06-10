@@ -1,36 +1,25 @@
-import { addUsersService, getUsersService } from "../services/users.service.js"
-
-// const usersInstance = new User()
+import { COLLECTION_NAMES } from "../constants/collection-names.js"
+import { addUsersService, getUsersService, deleteUsersService } from "../services/index.js"
+import { getController, addController, deleteController } from "./index.js"
+const collectionName = COLLECTION_NAMES.USERS
 
 async function getUsersController(req, res) {
-  try {
-    const docs = await getUsersService()
+  const docs = await getController({collectionName, service: getUsersService})
 
-    res.json({
-      text: "Hello Users!",
-      data: docs
-    })
-
-    console.log("Successfully fetched data from users collection")
-  } catch(err) {
-    console.log("Error fetching from users collection", err)
-  }
+  res.json(docs)
 }
 
 async function addUsersController(req, res) {
-  try {
-    const result = await addUsersService(req.body)
+  const result = await addController({reqbody: req.body, collectionName, service: addUsersService})
 
-    res.json({
-      text: "Add Users!",
-      data: result
-    })
-
-    console.log("Successfully inserted data into users collection")
-  } catch(err) {
-    console.log("Error inserting data into users collection", err)
-  }
+  res.json(result)
 }
 
+async function deleteUsersController(req, res) {
+  const args = {reqBody: req.body, service: deleteUsersService}
+  const result = await deleteController(args)
 
-export {getUsersController, addUsersController}
+  res.json(result)
+}
+
+export {getUsersController, addUsersController, deleteUsersController}

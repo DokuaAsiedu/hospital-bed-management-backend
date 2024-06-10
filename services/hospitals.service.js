@@ -1,6 +1,6 @@
 import { Hospital } from "../models/index.js"
 import { COLLECTION_IDS_PREFIX, COLLECTION_NAMES } from "../constants/index.js"
-import { getService, addService } from "./index.js"
+import { getService, addService, deleteService } from "./index.js"
 
 const hospitalsInstance = new Hospital()
 const idPrefix = COLLECTION_IDS_PREFIX.HOSPITALS
@@ -30,5 +30,13 @@ async function addHospitalsService(reqBody) {
   }
 }
 
+async function deleteHospitalsService(reqBody) {
+  const args = {instance: hospitalsInstance, reqBody}
 
-export { getHospitalsService, addHospitalsService}
+  const result = await deleteService(args)
+
+  return result
+}
+
+
+export { getHospitalsService, addHospitalsService, deleteHospitalsService}

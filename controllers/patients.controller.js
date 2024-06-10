@@ -1,34 +1,25 @@
-import { addPatientsService, getPatientsService } from "../services/index.js"
+import { COLLECTION_NAMES } from "../constants/collection-names.js"
+import { addPatientsService, getPatientsService, deletePatientsService } from "../services/index.js"
+import { getController, addController, deleteController } from "./index.js"
+const collectionName = COLLECTION_NAMES.PATIENTS
 
 async function getPatientsController(req, res) {
-  try {
-    const docs = await getPatientsService()
+  const docs = await getController({collectionName, service: getPatientsService})
 
-    res.json({
-      text: "Hello Patientss!",
-      data: docs
-    })
-
-    console.log("Successfully fetched data from patients collection")
-  } catch(err) {
-    console.log("Error fetching from patients collection", err)
-  }
+  res.json(docs)
 }
 
 async function addPatientsController(req, res) {
-  try {
-    const result = await addPatientsService(req.body)
+  const result = await addController({reqbody: req.body, collectionName, service: addPatientsService})
 
-    res.json({
-      text: "Add Patients!",
-      data: result
-    })
-
-    console.log("Successfully inserted data into patients collection")
-  } catch(err) {
-    console.log("Error inserting data into patients collection", err)
-  }
+  res.json(result)
 }
 
+async function deletePatientsController(req, res) {
+  const args = {reqBody: req.body, service: deletePatientsService}
+  const result = await deleteController(args)
 
-export {getPatientsController, addPatientsController}
+  res.json(result)
+}
+
+export {getPatientsController, addPatientsController, deletePatientsController}

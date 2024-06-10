@@ -59,6 +59,28 @@ export class Base {
     }
   }
 
+  async deleteDocs(data) {
+    try {
+      const collection = await this.connnectToCollection()
+
+      data.forEach(async item => {
+        await collection.deleteOne(item)
+      })
+
+      const result = {
+        message: `Successfully deleted data from ${this.collectionName} collection`,
+        status_code: 200
+      }
+
+      console.log(`Successfully deleted data from ${this.collectionName} collection`)
+
+      return result
+
+    } catch (err) {
+      console.log(`Error deleting documents from ${this.collectionName} collection:`, err)
+    }
+  }
+
   async countDocs() {
     try {
       const collection = await this.connnectToCollection()
