@@ -1,10 +1,8 @@
-import { Bed } from "../models/beds.model.js"
+import { addBedsService, getBedsService } from "../services/index.js"
 
-const bedsInstance = new Bed()
-
-async function getBeds(req, res) {
+async function getBedsController(req, res) {
   try {
-    const docs = await bedsInstance.getDocuments()
+    const docs = await getBedsService()
 
     res.json({
       text: "Hello Beds!",
@@ -17,9 +15,9 @@ async function getBeds(req, res) {
   }
 }
 
-async function addBeds(req, res) {
+async function addBedsController(req, res) {
   try {
-    const result = await bedsInstance.insertDocs(req.body)
+    const result = await addBedsService(req.body)
 
     res.json({
       text: "Add Beds!",
@@ -32,4 +30,4 @@ async function addBeds(req, res) {
   }
 }
 
-export {getBeds, addBeds}
+export {getBedsController, addBedsController}

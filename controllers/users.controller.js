@@ -1,10 +1,10 @@
-import { User } from "../models/users.model.js"
+import { addUsersService, getUsersService } from "../services/users.service.js"
 
-const usersInstance = new User()
+// const usersInstance = new User()
 
-async function getUsers(req, res) {
+async function getUsersController(req, res) {
   try {
-    const docs = await usersInstance.getDocuments()
+    const docs = await getUsersService()
 
     res.json({
       text: "Hello Users!",
@@ -17,9 +17,9 @@ async function getUsers(req, res) {
   }
 }
 
-async function addUsers(req, res) {
+async function addUsersController(req, res) {
   try {
-    const result = await usersInstance.insertDocs(req.body)
+    const result = await addUsersService(req.body)
 
     res.json({
       text: "Add Users!",
@@ -33,4 +33,4 @@ async function addUsers(req, res) {
 }
 
 
-export {getUsers, addUsers}
+export {getUsersController, addUsersController}

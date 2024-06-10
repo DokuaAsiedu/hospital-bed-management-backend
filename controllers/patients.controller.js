@@ -1,10 +1,8 @@
-import { Patient } from "../models/patients.model.js"
+import { addPatientsService, getPatientsService } from "../services/index.js"
 
-const patientsInstance = new Patient()
-
-async function getPatients(req, res) {
+async function getPatientsController(req, res) {
   try {
-    const docs = await patientsInstance.getDocuments()
+    const docs = await getPatientsService()
 
     res.json({
       text: "Hello Patientss!",
@@ -17,9 +15,9 @@ async function getPatients(req, res) {
   }
 }
 
-async function addPatients(req, res) {
+async function addPatientsController(req, res) {
   try {
-    const result = await patientsInstance.insertDocs(req.body)
+    const result = await addPatientsService(req.body)
 
     res.json({
       text: "Add Patients!",
@@ -33,4 +31,4 @@ async function addPatients(req, res) {
 }
 
 
-export {getPatients, addPatients}
+export {getPatientsController, addPatientsController}

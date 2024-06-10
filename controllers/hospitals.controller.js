@@ -1,10 +1,8 @@
-import { Hospital } from "../models/hospitals.model.js"
+import { addHospitalsService, getHospitalsService } from "../services/index.js"
 
-const hospitalsInstance = new Hospital()
-
-async function getHospitals(req, res) {
+async function getHospitalsController(req, res) {
   try {
-    const docs = await hospitalsInstance.getDocuments()
+    const docs = await getHospitalsService()
 
     res.json({
       text: "Hello Hospitals!",
@@ -17,9 +15,9 @@ async function getHospitals(req, res) {
   }
 }
 
-async function addHospitals(req, res) {
+async function addHospitalsController(req, res) {
   try {
-    const result = await hospitalsInstance.insertDocs(req.body)
+    const result = await addHospitalsService(req.body)
 
     res.json({
       text: "Add Hospitals!",
@@ -32,4 +30,4 @@ async function addHospitals(req, res) {
   }
 }
 
-export {getHospitals, addHospitals}
+export {getHospitalsController, addHospitalsController}
