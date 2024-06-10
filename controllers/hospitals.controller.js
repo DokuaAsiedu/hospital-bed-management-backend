@@ -1,5 +1,5 @@
 import { COLLECTION_NAMES } from "../constants/collection-names.js"
-import { addHospitalsService, getHospitalsService, deleteHospitalsService } from "../services/index.js"
+import { addHospitalsService, getHospitalsService, deleteHospitalsService, changeHospitalNameService } from "../services/index.js"
 import { getController, addController, deleteController } from "./index.js"
 const collectionName = COLLECTION_NAMES.HOSPITALS
 
@@ -22,4 +22,10 @@ async function deleteHospitalsController(req, res) {
   res.json(result)
 }
 
-export {getHospitalsController, addHospitalsController, deleteHospitalsController}
+async function changeHospitalNameController(req, res) {
+  const result = await changeHospitalNameService(req.body)
+
+  res.json(result)
+}
+
+export {getHospitalsController, addHospitalsController, deleteHospitalsController, changeHospitalNameController}

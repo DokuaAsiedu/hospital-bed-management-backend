@@ -38,5 +38,10 @@ async function deleteHospitalsService(reqBody) {
   return result
 }
 
+async function changeHospitalNameService(reqBody) {
+  const result = await hospitalsInstance.changeHospitalName(reqBody)
+  return result
+}
 
-export { getHospitalsService, addHospitalsService, deleteHospitalsService}
+
+export { getHospitalsService, addHospitalsService, deleteHospitalsService, changeHospitalNameService}
