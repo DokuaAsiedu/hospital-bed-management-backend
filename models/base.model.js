@@ -57,4 +57,14 @@ export class Base {
       console.log(`Error updating documents with id ${id} in ${this.collectionName} collection:`, err)
     }
   }
+
+  async countDocs() {
+    try {
+      const collection = await this.connnectToCollection()
+      const collectionCount = await collection.countDocuments({})
+      return collectionCount
+    } catch (err) {
+      console.log(`Error updating documents with id ${id} in ${this.collectionName} collection:`, err)
+    }
+  }
 }
