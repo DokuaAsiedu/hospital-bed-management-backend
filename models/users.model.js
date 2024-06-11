@@ -6,4 +6,15 @@ export class User extends Base {
     super();
     this.collectionName = COLLECTION_NAMES.USERS
   }
+
+  async registerUser(data) {
+    try {
+      const result = await this.insertDocs(data)
+      console.log(`Successfully registered user:`)
+      return result
+
+    } catch (err) {
+      console.log(`Error registering user:`, err)
+    }
+  }
 }

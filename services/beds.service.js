@@ -18,6 +18,7 @@ async function getBedsService({query={}}) {
 }
 
 async function addBedsService(reqBody) {
+  // console.log("reqbody", reqBody)
   const args = {instance: bedsInstance, reqBody, idPrefix}
   const result = await addService(args)
   return result

@@ -1,11 +1,32 @@
 import { DB_NAME } from "../config/config.js";
 import { Connection } from "../connection.js"
 import { Db } from "mongodb";
-import { DEFAULT_COLLECTIONS } from "../database/reset-db.js";
+import { DEFAULT_COLLECTIONS } from "../data/db-data.js";
 import { CollectionFactory } from "../factory/collection.factory.js";
 
 export class Base {
   collectionName;
+
+  static async clearDb() {
+    try {
+      let db = await Connection.connectToDb()
+      await db.dropDatabase()
+      db = new Db(Connection.client, DB_NAME)
+      console.log("dropping already existing db")
+      
+      DEFAULT_COLLECTIONS.forEach(async (item) => {
+        try {
+          const res = await db.createCollection(item.name)
+          console.log(`successfully created ${item.name} collection`)
+        } catch (err) {
+          console.log(`error creating ${item.name} collection:`, err)
+        }
+      });
+      console.log("Successfully reset db")
+    } catch (err) {
+      console.log(`Error resetting database:`, err)
+    }
+  }
 
   static async resetDb() {
     try {
@@ -84,6 +105,7 @@ export class Base {
     try {
       const collection = await this.connnectToCollection()
       const collectionCount = await collection.countDocuments({})
+      console.log("count", collectionCount)
       return collectionCount
     } catch (err) {
       console.log(`Error updating documents with id ${id} in ${this.collectionName} collection:`, err)

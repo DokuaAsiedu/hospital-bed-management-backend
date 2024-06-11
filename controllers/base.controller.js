@@ -8,6 +8,7 @@ async function getController({service, query={}}) {
 }
 
 async function addController({reqbody, service}) {
+  // console.log("reqbody", reqbody)
   const result = await service(reqbody)
 
   return {

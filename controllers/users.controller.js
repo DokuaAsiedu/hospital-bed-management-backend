@@ -1,5 +1,5 @@
-import { addUsersService, getUsersService, deleteUsersService } from "../services/index.js"
-import { getController, addController, deleteController } from "./index.js"
+import { getUsersService, deleteUsersService, regUserService } from "../services/index.js"
+import { getController, deleteController } from "./index.js"
 
 async function getUsersController(req, res) {
   const docs = await getController({service: getUsersService})
@@ -7,10 +7,15 @@ async function getUsersController(req, res) {
   res.json(docs)
 }
 
-async function addUsersController(req, res) {
-  const result = await addController({reqbody: req.body, service: addUsersService})
-
+async function regUserController(req, res) {
+  // console.log("bed: ",req.body)
+  const data = await req.body
+  const result = await regUserService(data)
   res.json(result)
+  
+  // data.forEach(async item => {
+  // })
+
 }
 
 async function deleteUsersController(req, res) {
@@ -20,4 +25,4 @@ async function deleteUsersController(req, res) {
   res.json(result)
 }
 
-export {getUsersController, addUsersController, deleteUsersController}
+export {getUsersController, deleteUsersController, regUserController}

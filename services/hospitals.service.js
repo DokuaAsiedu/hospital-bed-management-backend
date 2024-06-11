@@ -13,6 +13,7 @@ async function getHospitalsService() {
 }
 
 async function addHospitalsService(reqBody) {
+  // console.log("reqbody", reqBody)
   const args = {instance: hospitalsInstance, collectionName, reqBody, idPrefix}
   const result = await addService(args)
   return result

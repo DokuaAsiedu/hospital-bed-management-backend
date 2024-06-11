@@ -4,16 +4,21 @@ async function getService({instance, filter={}}) {
 }
 
 async function addService({instance, reqBody, idPrefix}) {
-  const docsCount = await instance.countDocs()
-  const docs = reqBody.map((item, index) => {
-    const id = docsCount + index + 1
-    return {
-      ...item,
-      _id: idPrefix + id
-    }
-  })
-  const result = await instance.insertDocs(docs)
-  return result
+  // reqBody.forEach(async elem => {
+    console.log(reqBody)
+    const docsCount = await instance.countDocs()
+    console.log("count:", docsCount)
+    const data = reqBody.map((item, index) => {
+      const id = docsCount + index + 1
+      return {
+        ...item,
+        _id: idPrefix + id
+      }
+    })
+    const result = await instance.insertDocs(data)
+    return result
+
+  // })
 }
 
 async function deleteService({instance, reqBody}) {

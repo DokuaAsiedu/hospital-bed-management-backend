@@ -12,6 +12,7 @@ async function getPatientsService() {
 }
 
 async function addPatientsService(reqBody) {
+  // console.log("reqbody", reqBody)
   const args = {instance: patientsInstance, reqBody, idPrefix}
   const result = await addService(args)
   return result

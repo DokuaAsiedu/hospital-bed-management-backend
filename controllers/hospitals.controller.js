@@ -8,6 +8,7 @@ async function getHospitalsController(req, res) {
 }
 
 async function addHospitalsController(req, res) {
+  // console.log("bed: ",req.body)
   const result = await addController({reqbody: req.body, service: addHospitalsService})
 
   res.json(result)
