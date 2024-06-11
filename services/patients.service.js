@@ -38,5 +38,21 @@ async function checkInPatientService(reqBody) {
   return result
 }
 
+async function togglePatientCheckInService(reqBody) {
+  if (!reqBody._id) {
+    return {message: "No patient id added"}
+  }
 
-export { getPatientsService, addPatientsService, deletePatientsService, changePatientNameService, checkInPatientService}
+  if (reqBody.check_in_status === "true") {
+    reqBody.check_in_status = true
+  } else if (reqBody.check_in_status === "false") {
+    reqBody.check_in_status = false
+  } else {
+    return {message: "Patient check in status not added to request body"}
+  }
+  const result = await patientsInstance.togglePatientCheckIn(reqBody)
+  return result
+}
+
+
+export { getPatientsService, addPatientsService, deletePatientsService, changePatientNameService, checkInPatientService, togglePatientCheckInService}

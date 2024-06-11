@@ -50,4 +50,62 @@ export class Patient extends Base {
       console.log(`Error checking in patient with id: ${data._id}`)
     }
   }
+
+  async togglePatientCheckIn(data) {
+    const checkInStatus = data.check_in_status
+    const patientFilter = {_id: data._id}
+
+    // get patient from collection
+    const patients = await this.getDocuments(patientFilter)
+    const patient = patients[0]
+    // if checking in while already checked in or checking out while already checked out exit
+    if (patient.bed_id === null && !checkInStatus) {
+      // if checking out while checked out
+      return {message: `Patient with id: ${data._id} already checked out`}
+    }
+    else if (patient.bed_id !== null && checkInStatus) {
+      // if checking in while checked in
+      return {message: `Patient with id: ${data._id} already checked in`}
+    }
+
+    const bedsInstance = new Bed()
+    const bedsFilter = {}
+    const payload = {}
+    const collection = await this.connnectToCollection()
+
+    if (checkInStatus) {
+      // check if a bed is available
+      bedsFilter.bed_id = null
+      const docs = await bedsInstance.getDocuments(bedsFilter)
+      if (!docs.length) {
+        return {message: "Unable to check in patient due to no beds available"}
+      }
+
+      payload.bed_id = docs[0]._id
+      payload.patient_id = data._id
+      await bedsInstance.updateBed(payload)
+      // insert patient_id into first doc
+      try {
+        const result = await collection.updateOne({_id: data._id}, {"$set": {bed_id: docs[0]._id}})
+        console.log(`Successfully checked in patient with id: ${data._id}`)
+        return result
+      } catch (err) {
+        console.log(`Error checking in patient with id: ${data._id}`)
+      }
+    }
+    else {
+      bedsFilter.patient_id = data._id
+      const docs = await bedsInstance.getDocuments(bedsFilter)
+      payload.bed_id = docs[0]._id
+      payload.patient_id = null
+      await bedsInstance.updateBed(payload)
+      try {
+        const result = await collection.updateOne({_id: data._id}, {"$set": {bed_id: null}})
+        console.log(`Successfully checked out patient with id: ${data._id}`)
+        return result
+      } catch (err) {
+        console.log(`Error checking out patient with id: ${data._id}`)
+      }
+    }
+  }
 }

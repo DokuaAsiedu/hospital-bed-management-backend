@@ -1,4 +1,4 @@
-import { addPatientsService, getPatientsService, deletePatientsService, changePatientNameService, checkInPatientService } from "../services/index.js"
+import { addPatientsService, getPatientsService, deletePatientsService, changePatientNameService, checkInPatientService, togglePatientCheckInService } from "../services/index.js"
 import { getController, addController, deleteController } from "./index.js"
 
 async function getPatientsController(req, res) {
@@ -32,4 +32,10 @@ async function checkInPatientController(req, res) {
   res.json(result)
 }
 
-export {getPatientsController, addPatientsController, deletePatientsController, changePatientNameController, checkInPatientController}
+async function togglePatientCheckInController(req, res) {
+  const result = await togglePatientCheckInService(req.body)
+  
+  res.json(result)
+}
+
+export {getPatientsController, addPatientsController, deletePatientsController, changePatientNameController, checkInPatientController, togglePatientCheckInController}
