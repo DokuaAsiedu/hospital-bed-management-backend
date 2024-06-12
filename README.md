@@ -22,3 +22,26 @@ The development server will run on http://localhost:8080 by default if there is 
 > After creating your cluster, copy the connection string (Instructions on how to do that provided [here](https://www.geeksforgeeks.org/how-to-get-the-database-url-in-mongodb/)) and assign this string to the `URI` constant in the `/config/config.js` file.
 
 And there you go. The API should be fully functional after following these instructions.
+
+## API Guide
+The routes available from this api are as follows:
+
+| Route | Description | Method |
+| -- | -- | -- |
+| / | Root of the api | GET |
+| /users | Returns all users | GET |
+| /users/reg | Registers a user | POST |
+| /users/delete | Deletes a user | DELETE |
+| /patients | Returns all patients | GET |
+| /patients/add | Adds a patient to a hospital | POST |
+| /patients/delete | Deletes a patient | DELETE |
+| /patients/change-name | Changes patient name | patch |
+| /patients/check-in | Checks in patient | POST |
+| /patients/check-out | Checks out patient | POST |
+| /hospitals | Returns all hospitals | GET |
+| /hospitals/add | Adds a hospital | POST |
+| /hospitals/delete | Deletes a hospital | DELETE |
+| /hospitals/change-name | Changes hospital name | PATCH |
+| /beds | Returns all beds | GET |
+| /beds/add | Adds a bed | POST |
+| /beds/delete | Deletes a bed | DELETE |
